@@ -1,9 +1,10 @@
-Here's a comprehensive outline for the documentation, including an introduction, technical details, deployment instructions, and a conclusion:
+# Deploying an Online Boutigque Web Application with Kubernetes
 
-# Online Boutique: A Cloud-Native Microservices Demo Application
+## Project Overview 
+Online Boutique: Is a **Cloud-Native Microservices Demo Application** which is depolyed in the web with Kubernetes to serve its customers (imaginary customers). In this project, I will replicate this deployment to harness my skillsets in **Kubernetes** and microservice applications. 
 
 ## Introduction
-Online Boutique is a cloud-first microservices demo application developed by Google. It consists of an 11-tier microservices architecture and is designed as a web-based e-commerce application where users can browse items, add them to the cart, and purchase them.
+Online Boutique is a cloud-first microservices demo application developed by Google. It consists of an 11-tier microservices architecture and is designed as a web-based e-commerce application where users can browse items, add them to the cart, and purchase them (Google). 
 
 The application is used by Google to showcase the use of various cloud-native technologies such as Kubernetes, Google Kubernetes Engine (GKE), Istio, Stackdriver, and gRPC. It is designed to be easily deployable on any Kubernetes cluster, with little to no configuration required.
 
@@ -24,11 +25,17 @@ Online Boutique is composed of the following 11 microservices:
 The services communicate with each other using gRPC, and the application also utilizes an in-cluster Redis cache for storing customer cart information.
 
 ## Deployment Instructions
-To deploy Online Boutique, you will need the following:
-1. A Google Cloud project
-2. A shell environment with `gcloud`, `git`, and `kubectl` installed
+To deploy Online Boutique, the following steps are taken:
+1. An IDE, I am using **VSCode**. 
+**N/B: On the official google repo, they recommended: A Google Cloud project
+2. Set up a shell env with `docker`, `git`, and `kubectl` in VSCode.
+**N/B**: Google recommds: A shell environment with `gcloud`, `git`, and `kubectl` installed
 
-### Quickstart (GKE)
+### Create A Project Repo From Visual Studio Code Terminal
+1. Open a new terminal in VScode
+2. Create a directory with a repo name you desire (named 
+
+### Get Project Resources
 1. Clone the repository:
    ```
    git clone https://github.com/GoogleCloudPlatform/microservices-demo
