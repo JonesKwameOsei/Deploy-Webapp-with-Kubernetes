@@ -1,4 +1,5 @@
 # Deploying an Online Boutigque Web Application with Kubernetes
+![image](https://github.com/JonesKwameOsei/Deploy-Webapp-with-Kubernetes/assets/81886509/9690b62b-0ac1-4b4d-a3c9-4304b82b16f9)
 
 ## Project Overview 
 Online Boutique: Is a **Cloud-Native Microservices Demo Application** which is depolyed in the web with Kubernetes to serve its customers (imaginary customers). In this project, I will replicate this deployment to harness my skillsets in **Kubernetes** and microservice applications. 
@@ -61,10 +62,10 @@ git push -u origin main
 
 ### Get Project Resources
 1. Clone the repository and  Change directory to microservices-demo:
-   ```
-   git clone https://github.com/GoogleCloudPlatform/microservices-demo
-   cd microservices-demo/
-   ```
+```
+git clone https://github.com/GoogleCloudPlatform/microservices-demo
+cd microservices-demo/
+```
 2. To open and view folders in the current working directory without opening a new window, run: 
 ```
 code -a . 
@@ -73,19 +74,19 @@ code -a .
 
 **N/B**: Skip steps 4 and 5 if you are not using `gcloud` and `Google Kubernetes Engine (GKE)`. 
 4. Set the Google Cloud project and region, and enable the Google Kubernetes Engine API:
-   ```
-   export PROJECT_ID=<PROJECT_ID>
-   export REGION=us-central1
-   gcloud services enable container.googleapis.com --project=${PROJECT_ID}
-   ```
+```
+export PROJECT_ID=<PROJECT_ID>
+export REGION=us-central1
+gcloud services enable container.googleapis.com --project=${PROJECT_ID}
+```
 5. Create a GKE cluster and get the credentials for it:
-   ```
-   gcloud container clusters create-auto online-boutique --project=${PROJECT_ID} --region=${REGION}
-   ```
+```
+gcloud container clusters create-auto online-boutique --project=${PROJECT_ID} --region=${REGION}
+```
 6. Deploy Online Boutique to the cluster:
-   ```
-   kubectl apply -f ./release/kubernetes-manifests.yaml
-   ```
+```
+kubectl apply -f ./release/kubernetes-manifests.yaml
+```
 **Output**:
 ```
 deployment.apps/currencyservice created
@@ -125,9 +126,9 @@ service/adservice created
 serviceaccount/adservice created
 ```
 7. Wait for the pods to be ready:
-   ```
-   kubectl get pods
-   ```
+```
+kubectl get pods
+```
 **Output**:
    ```
 NAME                                     READY   STATUS    RESTARTS   AGE
@@ -146,9 +147,9 @@ shippingservice-67989cd745-gdv4g         1/1     Running   0          8m41s
    ```
 
 8.  Access the web frontend using the frontend's external IP:
-   ```
-   kubectl get service frontend-external | awk '{print $4}'
-   ```
+```
+kubectl get service frontend-external | awk '{print $4}'
+```
 N/B: The Frontend external service IP might take a while to access. Hence, we will utilise lens to accesss it through port forwarding. 
 ```
 NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
@@ -185,16 +186,65 @@ We want to purchase **Candle holder**, so we will clik on it then add it to cart
 ![image](https://github.com/JonesKwameOsei/Deploy-Webapp-with-Kubernetes/assets/81886509/a8dc4e40-5cbb-4142-8ba2-9af7cdd1e964)<p>
 ![image](https://github.com/JonesKwameOsei/Deploy-Webapp-with-Kubernetes/assets/81886509/083259a2-ab84-4a52-adad-6102ed72c199)<p>
 
-
-11. When you're done, delete the GKE cluster:
-   ```
-   gcloud container clusters delete online-boutique --project=${PROJECT_ID} --region=${REGION}
-   ```
+### Cleaning Up
+When you're done, delete the the clusters
+1.To delete the GKE cluster (if you used google cloud), run:
+```
+gcloud container clusters delete online-boutique --project=${PROJECT_ID} --region=${REGION}
+```
+2. Stop the port forwarding in Lens
+3. To delete the clusters locally in `minikube`, run:
+```
+kubectl delete -f ./release/kubernetes-manifests.yaml 
+```
+**Output**:<p>
+```
+deployment.apps "currencyservice" deleted
+service "currencyservice" deleted
+serviceaccount "currencyservice" deleted
+deployment.apps "loadgenerator" deleted
+serviceaccount "loadgenerator" deleted
+deployment.apps "productcatalogservice" deleted
+service "productcatalogservice" deleted
+serviceaccount "productcatalogservice" deleted
+deployment.apps "checkoutservice" deleted
+service "checkoutservice" deleted
+serviceaccount "checkoutservice" deleted
+deployment.apps "shippingservice" deleted
+service "shippingservice" deleted
+serviceaccount "shippingservice" deleted
+deployment.apps "cartservice" deleted
+service "cartservice" deleted
+serviceaccount "cartservice" deleted
+deployment.apps "redis-cart" deleted
+service "redis-cart" deleted
+deployment.apps "emailservice" deleted
+service "emailservice" deleted
+serviceaccount "emailservice" deleted
+deployment.apps "paymentservice" deleted
+service "paymentservice" deleted
+serviceaccount "paymentservice" deleted
+deployment.apps "frontend" deleted
+service "frontend" deleted
+service "frontend-external" deleted
+serviceaccount "frontend" deleted
+deployment.apps "recommendationservice" deleted
+service "recommendationservice" deleted
+serviceaccount "recommendationservice" deleted
+deployment.apps "adservice" deleted
+service "adservice" deleted
+serviceaccount "adservice" deleted
+```
 
 ## Other Deployment Variations
 - **Istio/Anthos Service Mesh**: See [these instructions](https://github.com/GoogleCloudPlatform/microservices-demo/tree/master/docs/service-mesh-anthos.md).
 - **non-GKE clusters (Minikube, Kind)**: See the [Development Guide](https://github.com/GoogleCloudPlatform/microservices-demo/tree/master/docs/development-guide.md).
 - **Deploy Online Boutique variations with Kustomize**: The `/kustomize` folder contains instructions for customizing the deployment of Online Boutique with different variations, such as integrating with Google Cloud Operations or replacing the in-cluster Redis cache with Google Cloud Memorystore (Redis), AlloyDB, or Google Cloud Spanner.
 
+
 ## Conclusion
 Online Boutique is a powerful and flexible demo application that showcases the use of various cloud-native technologies. By providing a comprehensive set of deployment options and customization capabilities, it serves as a valuable resource for developers and DevOps teams looking to explore and experiment with modern cloud-based architectures and deployment strategies.
+
+Through this project, I have significantly expanded my skillset in managing containerized applications on the Kubernetes platform. I now have a deep understanding of containerization with Docker, allowing me to package applications and their dependencies into portable, self-contained units.
+
+My proficiency in Kubernetes has grown immensely. I can now confidently navigate the core concepts, resource management, and deployment strategies of this powerful container orchestration system.
